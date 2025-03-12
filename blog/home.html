@@ -1,0 +1,577 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Pantry app blog</title>
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, minimum-scale=1.0"
+    />
+    <script
+      src="https://cdn.jsdelivr.net/npm/eruda"
+      onload="eruda.init()"
+    ></script>
+    <link rel="stylesheet" href="https://cdn.simplecss.org/simple.min.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/styles/default.min.css"
+    />
+    <script
+      src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/highlight.min.js"
+      defer=""
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/languages/xml.min.js"
+      defer=""
+    ></script>
+    <script>
+      window.addEventListener("DOMContentLoaded", () => {
+        hljs.highlightAll();
+      });
+    </script>
+  </head>
+  <body>
+    <h1>Pantry app blog</h1>
+    <p>
+      I'm
+      <a
+        href="https://jg10.solidcommunity.net/devlog/home.html?uri=https%3A%2F%2Fjg10.solidcommunity.net%2Fdevlog%2Fnow.ttl%23Pantry"
+        >working</a
+      >
+      on a pantry app. I want to use recipes compatible with Umai, but connected
+      with a record of what ingredients are in the house. I have a more or less
+      functional version that I've started using in my home. It's rough around
+      the edges and I keep thinking of new functionality that would improve its
+      usability. But that's a key part of why I've built it the way I have - the
+      idea of enabling user control over both their data and the interfaces used
+      to interact with it. Rather than simply sharing my current version, this
+      blog will break it down and built it back up, step by step.
+    </p>
+    <p>Eventually, this blog and app will include:</p>
+    <ul>
+      <li>
+        Keep track of groceries within one or more locations
+        <ul>
+          <li>
+            <a
+              href="https://jg10.solidcommunity.net/pantry/blog/home.html#part3"
+              >Define groceries</a
+            >
+            and locations
+          </li>
+          <li>
+            <a
+              href="https://jg10.solidcommunity.net/pantry/blog/home.html#part3"
+            >
+              Edit the approximate quantity of a grocery
+            </a>
+            , saving it as an observation. Record that a grocery was used
+          </li>
+          <li>
+            <a
+              href="https://jg10.solidcommunity.net/pantry/blog/home.html#part3"
+            >
+              List recipes using the grocery as an ingredient.
+            </a>
+          </li>
+          <li>List groceries that are available or need to be bought</li>
+          <li>Search for groceries</li>
+        </ul>
+      </li>
+      <li>
+        The app links recipes with what is in the pantry
+        <ul>
+          <li>
+            <a
+              href="https://jg10.solidcommunity.net/pantry/blog/home.html#part3"
+            >
+              Annotate recipes to note which groceries are required
+            </a>
+          </li>
+          <li>
+            <a
+              href="https://jg10.solidcommunity.net/pantry/blog/home.html#part3"
+            >
+              See whether the ingredients for a recipe are available</a
+            >
+          </li>
+          <li>
+            List recipes including which ingredients need to be bought,
+            separating out staples from special ingredients
+          </li>
+          <li>
+            See what groceries need to be used and what recipes might use them
+          </li>
+        </ul>
+      </li>
+      <li>
+        The app links the pantry and recipes to a shopping list
+        <ul>
+          <li>Add/remove ingredients to a shopping list</li>
+          <li>Mark ingredients as bought</li>
+        </ul>
+      </li>
+    </ul>
+    <h2 id="part1">Part 1: Showing a recipe</h2>
+    <small>Updated 3 Mar 2025</small>
+    <p>
+      My starting point is compatibility with the recipe app
+      <a href="https://umai.noeldemartin.com">Umai</a>. It uses
+      <a href="https://schema.org/Recipe"> schema.org Recipe objects</a>. As
+      presented by <i>Practical Solid</i>, it's already possible to simply
+      <a href="https://tube.tchncs.de/w/byuLJ8ybMB1ynUg6sbTdhB"
+        >view and add to a recipe in the PodOS browser</a
+      >. Because we'll be integrating with pantry data, we want to go one step
+      further and create a custom interface.
+    </p>
+    <p>
+      We're going to start with
+      <a href="https://github.com/pod-os/PodOS/tree/main/elements"
+        >PodOS elements</a
+      >. We create a plain HTML file, in this case hosted on a Solid pod, using
+      a set of web components to access the recipe data. Additionally, we'll
+      autoload some additional experimental web components that provide rough
+      editing capabilities and allow the use of prefixes.
+    </p>
+    <ul>
+      <li>
+        <a href="01/app.html">app</a>
+      </li>
+      <li>
+        <a href="01/rosti.ttl">data</a>
+      </li>
+    </ul>
+    <p>
+      Starting from the recipe itself, <code>pos-picture</code> is used to fetch
+      a known picture (here using <code>schema:image</code>) and a name is
+      accessed using <code>property="schema:name"</code>. The intention is for
+      this UI data binding to work similar to
+      <a href="https://mavo.io">Mavo</a>.
+    </p>
+    <pre style="overflow-x:auto"><code class="language-html">
+&lt;pos-resource
+    uri="https://jg10.solidcommunity.net/pantry/blog/01/rosti.ttl#it"
+    prefix="schema: https://schema.org/"
+&gt;
+    &lt;pos-picture>&lt;/pos-picture>
+    &lt;h2>
+        &lt;my-editable-literal property="schema:name">
+        &lt;/my-editable-literal>
+    &lt;/h2>
+&lt;/pos-resource>
+    </code></pre>
+    <p>
+      Ingredients and instructions are slightly more complex. An experimental
+      list web component is used that iterates through instructions ordered by
+      their <code>schema:position</code> and displays each item using a
+      template.
+    </p>
+    <pre style="overflow-x:auto"><code class="language-html">
+&lt;my-list 
+    property="schema:recipeInstructions" 
+    sort="schema:position"
+>
+    &lt;template name="item">
+        &lt;li>
+          &lt;my-editable-literal property="schema:text">
+          &lt;/my-editable-literal>
+        &lt;/li>
+    &lt;/template>
+&lt;/my-list>
+    </code></pre>
+    <h2 id="part2">Part 2: Browsing recipes and beyond</h2>
+    <small>Updated 5 Mar 2025</small>
+    <p>
+      In part 1, the app only opens a single resource. We want to be able to
+      open multiple recipes but also different types of objects. To support an
+      open world assumption, we want to be able to handle unknown types too.
+    </p>
+    <p>
+      We add a navigation bar, and use
+      <code>
+        <a
+          href="https://github.com/pod-os/PodOS/tree/main/elements/src/components/pos-type-router"
+          >pos-type-router</a
+        >
+      </code>
+      as a generic component to display arbitrary resources.
+    </p>
+    <ul>
+      <li>
+        <a href="02/app.html">app</a>
+      </li>
+    </ul>
+    <p>
+      Client side routing is implemented using the PodOS
+      <code
+        ><a
+          href="https://github.com/pod-os/PodOS/tree/main/elements/src/components/pos-router"
+          >pos-router</a
+        ></code
+      >
+      component. We listen for a <code>pod-os:route-changed</code> event after
+      navigating to e.g.,
+      <code>https://jg10.solidcommunity.net/pantry/blog/02/</code>, and update
+      the uri on <code>pos-resource</code>, which causes the new uri to load -
+      in this case showing the contents of the container.
+    </p>
+    <p>
+      Rather than adding complexity within the app, we can split out the recipe
+      as a separate "pane". We use an experimental conditional rendering
+      component to display the recipe pane for
+      <code>schema:Recipe</code> objects, and display
+      <code>pos-type-router</code> otherwise.
+    </p>
+    <pre><code>
+&lt;show-if if-else>
+    &lt;template if-typeof="schema:Recipe" src="recipe.html">
+    &lt;/template>
+    &lt;template else>
+        &lt;pos-type-router>&lt;/pos-type-router>
+    &lt;/template>
+&lt;/show-if>
+    </code></pre>
+    <p>
+      The recipe pane is dynamically loaded from
+      <a href="02/recipe.html">recipe.html</a>. It's the same HTML code that we
+      used in part 1 - the file is a HTML fragment using web components that
+      receive access to a PodOS instance and a resource via events. I've made a
+      first attempt at a
+      <a
+        href="https://jg10.solidcommunity.net/open-with/databrowser-open-with.html#pane-class-podos-compatible-panes"
+        >spec</a
+      >
+      for PodOS-compatible panes.
+    </p>
+    <p>
+      An advantage of having a separate recipe pane is that we can reuse it in
+      other contexts. This potentially includes the pod browser itself, in the
+      form of a dynamically registered pane. Using a proof of concept
+      <code>registered-pane</code> and a demo type registry, we have:
+    </p>
+
+    <ul>
+      <li>
+        <a href="02/browser.html"> browser app </a>
+      </li>
+      <li>
+        <a href="02/prefs.ttl"> registry data </a>
+      </li>
+    </ul>
+    <p>
+      As specified by the same draft
+      <a
+        href="https://jg10.solidcommunity.net/open-with/databrowser-open-with.html"
+        >spec</a
+      >, panes and external apps are specified as part of a type registration.
+      The browser app uses an experimental
+      <code>registered-pane</code> component to load the pane, and
+      <code>open-with</code> component to provide a menu that allows the user to
+      open the recipe in
+      <a
+        href="https://umai.noeldemartin.com/viewer?url=https://jg10.solidcommunity.net/pantry/blog/02/rosti.ttl%23it"
+      >
+        Umai Viewer </a
+      >. The browser app itself doesn't know about recipes, but the type
+      registry does, which allows it to show our custom pane.
+    </p>
+    <figure>
+      <img src="02/browser-app.png" style="max-width:300px" />
+      <figcaption>
+        Browser app displaying the resource using the dynamically loaded recipe
+        pane, and with the open-with menu open.
+      </figcaption>
+    </figure>
+    <h2 id="part3">Part 3: Going beyond the Umai data model</h2>
+    <small>Updated 7 Mar 2025</small>
+    <p>In this part, we're going to add the features:</p>
+    <ul>
+      <li>Define groceries [...]</li>
+      <li>Edit the approximate quantity of a grocery [...]</li>
+      <li>Annotate recipes to note which groceries are required</li>
+      <li>List recipes using the grocery as an ingredient.</li>
+      <li>See whether the ingredients for a recipe are available</li>
+    </ul>
+    <h3>Groceries</h3>
+    <p>
+      To do this, we need to go beyond Umai's data model. A grocery will be a
+      <code>schema:Product</code>. We'll define a new predicate for approximate
+      quantity of a grocery and named individuals
+      <code> None, Low, Some, Many </code>
+      .
+    </p>
+    <pre><code>
+:1638629734460861 a schema:Product; 
+rdfs:label "Potatoes"; 
+pantry:approxQuantity pantry:None.
+      </code></pre>
+    <p>
+      We'll store all products in a pantry document. Dereferencing the pantry
+      document will return all the known products in one go. This is primarily a
+      performance based
+      <a href="https://ruben.verborgh.org/blog/2022/12/30/lets-talk-about-pods/"
+        >document box</a
+      >. We want to be able to load information about all groceries in a single
+      request. When we load or navigate to the pantry document, we want to know
+      that's what we're looking at, so we give it a class. There's no predicate
+      linking the pantry document to individual products because it's just a
+      view of the underlying graph. One day Solid might allow such a view to be
+      dynamically generated from a hybrid graph.
+    </p>
+    <pre><code>
+<> a pantry:Pantry.
+      </code></pre>
+    <p>
+      We'll create new panes for a <code>pantry:Pantry</code> and
+      <code>schema:Product</code>. We'll keep them simple and add more features
+      later. The same panes can be used in the data browser, so we add them in
+      the registry too.
+    </p>
+    <ul>
+      <li>
+        <a
+          href="03/app.html?uri=https%3A%2F%2Fjg10.solidcommunity.net%2Fpantry%2Fblog%2F03%2Fpantry.ttl"
+          >app with pantry pane</a
+        >
+      </li>
+      <li>
+        <a
+          href="03/app.html?uri=https%3A%2F%2Fjg10.solidcommunity.net%2Fpantry%2Fblog%2F03%2Fpantry.ttl%231638629734460861"
+          >app with product pane</a
+        >
+      </li>
+      <li><a href="03/pantry.html">pantry pane</a></li>
+      <li><a href="03/product.html">product pane</a></li>
+      <li><a href="03/pantry.ttl">pantry document</a></li>
+      <li><a href="03/prefs.ttl">registry</a></li>
+    </ul>
+    <figure>
+      <img src="03/pantry.png" style="max-width:300px" />
+      <figcaption>Pantry pane</figcaption>
+    </figure>
+    <p>
+      The pantry pane offers the user the option to add a new grocery just by
+      giving it a name, which can also be edited later. Creating the grocery
+      involves adding several triples to a specific document, so we do this with
+      an experimental wrapper around a form. The pantry document uri is
+      hard-coded here. This works fine for a user creating a custom interface,
+      but we'll need to generalise this later for anybody else to use the app.
+    </p>
+    <pre><code>
+&lt;form
+    typeof="schema:Product"
+    doc="https://jg10.solidcommunity.net/pantry/blog/03/pantry.ttl"
+>
+    &lt;input property="rdfs:label" />
+    &lt;input type="submit" value="New" />
+&lt;/form>
+      </code></pre>
+    <figure>
+      <img src="03/product.png" style="max-width:300px" />
+      <figcaption>Product pane</figcaption>
+    </figure>
+    <p>
+      The product pane uses an experimental classifier web component inspired by
+      <a
+        href="https://solidos.github.io/solid-ui/Documentation/forms-intro.html"
+        >SolidOS <code>ui:Classifier</code></a
+      >. The web component dereferences
+      <code>pantry:ProductApproxQuantity</code> and offers the user to select
+      from instances of that class.
+    </p>
+    <pre><code>
+&lt;my-classifier
+      label="Quantity:"
+      property="pantry:approxQuantity"
+      category="pantry:ProductApproxQuantity"
+>&lt;/my-classifier>
+      </code></pre>
+    <p>
+      The product pane loads recipes that use that grocery. To do this, we need
+      to link groceries and recipes.
+    </p>
+    <h3>Annotating recipes</h3>
+    <ul>
+      <li><a href="03/app.html">app with recipe pane</a></li>
+      <li><a href="03/recipe.html">recipe pane</a></li>
+      <li><a href="03/supplies.ttl">supplies document</a></li>
+    </ul>
+    <p>
+      It's a long standing issue that
+      <a href="https://github.com/schemaorg/schemaorg/issues/882"
+        ><code>schema:recipeIngredient</code> does not support structured
+        data</a
+      >, which is perhaps also understandable given the need to cover such cases
+      as "1kg/ 2 lb potatoes (skin on weight) ( - Aus: Sebago (dirt brushed),
+      US: Yukon Gold, Russet, UK: Maris Piper, King Edwards (Note 1))". The
+      solution we'll pick is to use
+      <a href="https://schema.org/supply"><code>schema:supply</code></a
+      >. We can use the same label, but be specific about the grocery item and
+      even specify the order of ingredients using <code>schema:position</code>.
+    </p>
+    <pre><code>
+:1741337498953
+    schem:item &lt;pantry.ttl#1638629734460861>;
+    schem:name
+        "1kg/ 2 lb potatoes (skin on weight) ( - Aus: Sebago (dirt brushed), US: Yukon Gold, Russet, UK: Maris Piper, King Edwards (Note 1))";
+    schem:position "1".
+      </code></pre>
+    <p>
+      But Umai (and most websites with structured recipe data) use
+      <code>schema:recipeIngredient</code> and not <code>schema:supply</code>.
+      What we're going to do is use both predicates and keep them in sync. We're
+      going to start by doing it the low tech way - we're going to show both
+      sets of data and the user will visually ensure that they match. A second
+      solution would be to sync them using
+      <a href="https://spectra.video/w/fAjm253YiF9aEch4stYUHQ">CRDTs</a>, as
+      already used by Umai - a change in one of the predicates would be
+      accompanied by a change in the other. We'll explore a third solution
+      later.
+    </p>
+    <p>
+      With our low tech solution, the user autocompletes ingredients from the
+      groceries defined in the pantry document. In this example, I don't
+      actually care what type of potatoes are needed - and if I do I can return
+      to the recipe to check. Similarly, I'm opting to substitute normal butter
+      instead of ghee. I haven't annotated vegetable oil, salt or pepper because
+      I always have them in the house. I've progressively enhanced the text
+      descriptions with structured data only for parts I care about, and I'm
+      using a pantry defined at the granularity that I want as the point of
+      truth rather than one provided by others.
+    </p>
+    <figure>
+      <img src="03/recipe.png" style="max-width:300px" />
+      <figcaption>
+        We can now annotate recipes to note which groceries are required.
+      </figcaption>
+    </figure>
+    <p>
+      Because the pantry document provides information about all groceries at
+      once, the recipe pane can load that document and show that I have no
+      potatoes and lots of butter. It also provides links to those groceries to
+      be able to take more actions that involve them. If I decide later that I
+      do sometimes want to buy and use ghee instead of butter, I could also add
+      it as a grocery, link it to the recipe here and see the availability of
+      both the preferred ingredient and its potential substitute.
+    </p>
+    <p>
+      Autocomplete is implemented with an experimental component with a similar
+      interface to the classifier. All loaded instances of
+      <code>schema:Product</code> are suggested. If <code>category</code> is
+      missing, then all known objects of <code>schema:item</code> are used
+      instead.
+    </p>
+    <pre><code>
+&lt;autocomplete-input
+    property="schema:item"
+    category="schema:Product"
+>&lt;/autocomplete-input>
+      </code></pre>
+    <p>
+      How is this data used in the product pane? By default, the
+      <code>schema:supply</code> statements would be saved in the same document
+      as the recipe. We override this to instead save them in a supplies
+      document. This acts as an index of recipes by ingredient to avoid needing
+      to load all recipes. An alternative would be to use a local first approach
+      (like Umai) and have all recipes at hand. The two approaches could
+      co-exist as long as the index is updated when recipe documents are
+      modified.
+    </p>
+    <pre><code>
+&lt;my-list
+    property="schema:supply"
+    sort="schema:position"
+    add-new
+    doc="https://jg10.solidcommunity.net/pantry/blog/03/supplies.ttl"
+>
+          </code></pre>
+    <p>
+      Returning to the product pane - providing a list of recipes that use an
+      ingredient involves loading the supplies document, iterating through the
+      HowToSupply objects that use the ingredient, and loading the name of the
+      corresponding recipe.
+    </p>
+    <h3>Cooperative interoperability</h3>
+    <p>
+      On the whole, this style of development is strongly tied to navigating a
+      knowledge graph, with deliberate dereferencing of documents at key
+      locations in the rendering process. It's unlikely to achieve
+      <a href="https://spectra.video/w/1iGJJhQJLcajs5W5DZZ2Qz"
+        >interoperable serendipity</a
+      >, but we can still explicitly communicate the data structures that we use
+      to enable others to interoperate.
+    </p>
+    <p>
+      If I'm working in a particular domain, e.g., food, and I want to
+      interoperate with other apps, e.g., Umai, I might ask: what data
+      structures can I use? To begin with, I might want to be more precise
+    </p>
+    <style>
+      th { text-align: left}
+    </style>
+    <table>
+      <tr>
+        <th></th>
+        <th>Umai v0.1.8</th>
+        <th>Pantry app part 3</th>
+      </tr>
+      <tr>
+        <td>Works with recipes</td>
+        <td>x</td>
+        <td>x</td>
+      </tr>
+      <tr>
+        <td>Works with records of pantry contents</td>
+        <td></td>
+        <td>x</td>
+      </tr>
+      <td>Works with shopping lists</td>
+      <td></td>
+      <td></td>
+    </table>
+    <p>
+      Within apps that work with recipes, we can talk about different classes
+      and shapes.
+    </p>
+    <table>
+      <tr>
+        <th></th>
+        <th>Umai v0.1.8</th>
+        <th>Pantry app part 3</th>
+      </tr>
+      <tr>
+        <td>Works with schema:Recipe</td>
+        <td>x</td>
+        <td>x</td>
+      </tr>
+      <tr>
+        <td>Works with Umai v0.1.8 data shape</td>
+        <td>x</td>
+        <td>x</td>
+      </tr>
+      <tr>
+        <td>Works with schema:supply</td>
+        <td></td>
+        <td>x</td>
+      </tr>
+      <tr>
+        <td>
+          Works with
+          <a href="https://www.bbc.co.uk/ontologies/food-ontology#Recipe"
+            >fo:Recipe</a
+          >
+        </td>
+        <td></td>
+        <td></td>
+      </tr>
+    </table>
+    <p>
+      Similar to how web browser support tables work for https://caniuse.com,
+      developer and data power-users gradually get the feeling for which data
+      structures are supported by the most apps or by the apps one wants to use.
+      Efficiently organising app compatibility data is something we'll have to
+      come back to...
+    </p>
+    <h2 id="part4">Part 4: What can I cook? What do I need to buy?</h2>
+    <p>Coming soon...</p>
+  </body>
+</html>

@@ -1,0 +1,44 @@
+<div
+  prefix="sosa: http://www.w3.org/ns/sosa/ schema: https://schema.org/ rdfs: http://www.w3.org/2000/01/rdf-schema# dcterms: http://purl.org/dc/terms/ rdf: http://www.w3.org/1999/02/22-rdf-syntax-ns# prov: https://www.w3.org/ns/prov# oa: http://www.w3.org/ns/oa# ldp: http://www.w3.org/ns/ldp# solid: http://www.w3.org/ns/solid/terms# pantry: https://jg10.solidcommunity.net/pantry/terms.ttl#"
+>
+  <my-editable-literal property="rdfs:label" placeholder></my-editable-literal>
+  <ion-item>
+    <my-classifier
+      label="Quantity:"
+      property="pantry:approxQuantity"
+      category="pantry:ProductApproxQuantity"
+    ></my-classifier>
+  </ion-item>
+  <br />
+  <when-loaded
+    uri="https://jg10.solidcommunity.net/pantry/blog/03/supplies.ttl"
+    update=".recipe-list"
+  ></when-loaded>
+  <show-if rev="schema:item" class="recipe-list">
+    <div>
+      Recipes:
+      <ion-list>
+        <my-list rev="schema:item" class="recipe-list">
+          <template name="item">
+            <ion-item>
+              <!-- FIXME every recipe-list-item will be called -->
+              <see-also rev="schema:supply" update=".needs-supply"></see-also>
+              <my-property rev="schema:supply" class="needs-supply">
+                <my-link>
+                  <my-editable-literal
+                    property="schema:name"
+                    class="needs-supply"
+                  ></my-editable-literal>
+                  <!--
+                    Not responsive to update or RDF change
+                  <pos-value predicate="https://schema.org/name"></pos-value>
+                  -->
+                </my-link>
+              </my-property>
+            </ion-item>
+          </template>
+        </my-list>
+      </ion-list>
+    </div>
+  </show-if>
+</div>

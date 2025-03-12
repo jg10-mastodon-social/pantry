@@ -1,0 +1,109 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Pantry app - part 1</title>
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, minimum-scale=1.0"
+    />
+    <script
+      type="module"
+      src="https://cdn.jsdelivr.net/npm/@pod-os/elements/dist/elements/elements.esm.js"
+    ></script>
+    <link
+      href="https://cdn.jsdelivr.net/npm/@pod-os/elements/dist/elements/elements.css"
+      rel="stylesheet"
+    />
+    <script
+      src="https://cdn.jsdelivr.net/npm/eruda"
+      onload="eruda.init()"
+    ></script>
+    <script
+      src="https://king-cello.bnr.la/scripts/ReceiveResourceOS.js"
+      defer=""
+    ></script>
+    <script
+      src="https://king-cello.bnr.la/scripts/loadElement.js"
+      defer=""
+    ></script>
+    <script>
+      window.addEventListener("DOMContentLoaded", () => {
+        setupLazyLoadComponents();
+      });
+    </script>
+  </head>
+  <body>
+    <pos-app>
+      <ion-content>
+        <pos-resource
+          uri="https://jg10.solidcommunity.net/pantry/blog/01/rosti.ttl#it"
+          prefix="sosa: http://www.w3.org/ns/sosa/ schema: https://schema.org/ rdfs: http://www.w3.org/2000/01/rdf-schema# dcterms: http://purl.org/dc/terms/ rdf: http://www.w3.org/1999/02/22-rdf-syntax-ns# prov: https://www.w3.org/ns/prov# oa: http://www.w3.org/ns/oa# ldp: http://www.w3.org/ns/ldp#"
+        >
+          <div class="ion-padding-horizontal">
+            <pos-picture></pos-picture>
+            <h2>
+              <my-editable-literal property="schema:name"></my-editable-literal>
+            </h2>
+            <p>
+              <small>
+                <my-list property="schema:sameAs">
+                  <template name="item">
+                    <my-link><pos-label></pos-label></my-link>&nbsp;
+                  </template>
+                </my-list>
+              </small>
+            </p>
+            <p>
+              <my-editable-literal
+                property="schema:description"
+              ></my-editable-literal>
+            </p>
+            <p>
+              Prep time
+              <my-editable-literal
+                property="schema:prepTime"
+              ></my-editable-literal>
+            </p>
+            <p>
+              Cooktime
+              <my-editable-literal
+                property="schema:cookTime"
+              ></my-editable-literal>
+            </p>
+            <p>
+              Yield
+              <my-editable-literal
+                property="schema:recipeYield"
+              ></my-editable-literal>
+            </p>
+            <h2>Ingredients</h2>
+            <p>
+              <my-list property="schema:recipeIngredient">
+                <template name="item">
+                  <li>
+                    <my-editable-literal
+                      property="schema:recipeIngredient"
+                    ></my-editable-literal>
+                  </li>
+                </template>
+              </my-list>
+            </p>
+            <h2>Instructions</h2>
+            <my-list
+              property="schema:recipeInstructions"
+              sort="schema:position"
+            >
+              <template name="item">
+                <li>
+                  <my-editable-literal
+                    property="schema:text"
+                  ></my-editable-literal>
+                </li>
+              </template>
+            </my-list>
+          </div>
+        </pos-resource>
+      </ion-content>
+    </pos-app>
+  </body>
+</html>

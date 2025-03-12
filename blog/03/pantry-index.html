@@ -1,0 +1,30 @@
+<h1>All products</h1>
+<my-list if-typeof="https://schema.org/Product" sort="rdfs:label" n="200">
+  <template name="item">
+    <ion-item>
+      <ion-label>
+        <my-link>
+          <pos-label></pos-label>
+        </my-link>
+      </ion-label>
+    </ion-item>
+  </template>
+</my-list>
+<ion-item>
+  <ion-label>
+    <details>
+      <summary>New product</summary>
+      <my-form>
+        <template>
+          <form
+            typeof="schema:Product"
+            doc="https://jg10.solidcommunity.net/pantry/blog/03/pantry.ttl"
+          >
+            <input property="rdfs:label" />
+            <input type="submit" value="New" />
+          </form>
+        </template>
+      </my-form>
+    </details>
+  </ion-label>
+</ion-item>

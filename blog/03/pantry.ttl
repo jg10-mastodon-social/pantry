@@ -1,0 +1,11 @@
+@prefix : <#>.
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>.
+@prefix ter: <../../terms.ttl#>.
+@prefix schem: <https://schema.org/>.
+
+<> a ter:Pantry.
+
+:1638629734460861
+a schem:Product; rdfs:label "Potatoes"; ter:approxQuantity ter:None.
+:8119875242222632
+a schem:Product; rdfs:label "Butter"; ter:approxQuantity ter:Lots.

@@ -1,0 +1,166 @@
+
+
+<#it> a <https://schema.org/Recipe>;
+    <https://schema.org/cookTime> "PT25M";
+    <https://schema.org/description> "This is a recipe for truly crispy Potato Rosti that's beautifully golden on the outside and fluffy on the inside. The secret is pan frying in the right fat! Butter = tasty but not crispy. Oil = crispy but flavourless. The Swiss cracked the code - use clarified butter (or ghee!).And if you want ultra ultra crispy, make small thin ones instead - they are literally potato crisp crispy! This recipe would probably serve 6 normal people, but in my family it serves 4. Makes 1 giant rosti about 2cm / 4/5&quot; thick, or 10 - 12 small rostis.";
+    <https://schema.org/image> <https://www.recipetineats.com/tachyon/2020/10/Potato-Rosti_2-SQ.jpg>;
+    <https://schema.org/name> "Crispy Potato Rosti";
+    <https://schema.org/prepTime> "PT10M";
+    <https://schema.org/recipeIngredient> "1kg/ 2 lb  potatoes (skin on weight) ( - Aus: Sebago (dirt brushed), US: Yukon Gold, Russet, UK: Maris Piper, King Edwards (Note 1))", "60g/ 4 tbsp   clarified butter / ghee (, separated (sub half butter, half vegetable oil) (Note 2))", "3/4 tsp salt (, kosher/cooking salt (or 1/2 tsp table salt))", "15g/ 1 tbsp  clarified butter / ghee or normal butter (, melted (Note 2))", "1/2 tsp finely ground black pepper";
+    <https://schema.org/recipeYield> "4,4 - 6 people";
+    <https://schema.org/sameAs> <https://www.recipetineats.com/potato-rosti/>;
+    <https://schema.org/recipeInstructions> <#a15ba1b6-b806-4067-a47e-82d156f10112>, <#326442fa-e513-4190-82d6-19028ac2c81d>, <#a5ba1ea3-df34-42b7-bcab-7ef33c9f518b>, <#e7395b70-cf10-4924-abd4-1f2a58935b6b>, <#df9982bb-5a79-4cc4-9533-3ec686f573e4>, <#cfe5646f-c96b-4a1f-b465-fda41cf5e3dc>, <#1eac7a7c-8bcc-41f7-94f2-f3a1e0ad4480>, <#f9478c05-520e-4bfe-88fa-13c316be40c6>, <#6191cfc3-09d9-47f1-a95e-4f7b77a57909>, <#809c04c8-2182-4d5d-a637-23fe23ccb0f1>.
+<#a15ba1b6-b806-4067-a47e-82d156f10112> a <https://schema.org/HowToStep>;
+    <https://schema.org/position> 1;
+    <https://schema.org/text> "Peel then grate the potatoes using a box grater, trying to get nice long strands if you can.".
+<#326442fa-e513-4190-82d6-19028ac2c81d> a <https://schema.org/HowToStep>;
+    <https://schema.org/position> 2;
+    <https://schema.org/text> "Grab handfuls of potato and squeeze out excess liquid, then place in bowl. This helps make the potato crispier (otherwise all that water has to steam out in the pan).".
+<#a5ba1ea3-df34-42b7-bcab-7ef33c9f518b> a <https://schema.org/HowToStep>;
+    <https://schema.org/position> 3;
+    <https://schema.org/text> "Add butter, salt and pepper then toss. Don’t worry if your potatoes go brown/reddy – it’s still safe to eat, and turns white again when cooked.".
+<#e7395b70-cf10-4924-abd4-1f2a58935b6b> a <https://schema.org/HowToStep>;
+    <https://schema.org/position> 4;
+    <https://schema.org/text> "Melt half the clarified butter in a 26cm / 10.5\" (or thereabouts) non-stick pan or skillet over medium low heat. Shallow non-stick pan with sloped sides is best for easy rosti removal. / Use stainless steel pan on 3. Make sure pan is hot with water drops skidding before adding butter.".
+<#df9982bb-5a79-4cc4-9533-3ec686f573e4> a <https://schema.org/HowToStep>;
+    <https://schema.org/position> 5;
+    <https://schema.org/text> "Place the potato in pan, but do not pack down. Use rubber spatula to tidy the edges, then lightly pat down to even surface.".
+<#cfe5646f-c96b-4a1f-b465-fda41cf5e3dc> a <https://schema.org/HowToStep>;
+    <https://schema.org/position> 6;
+    <https://schema.org/text> "Cook first side: Cook 12 minutes until underside is very golden and crispy, lifting edge with rubber spatula to check. If by 8 minutes it is not going golden, increase heat.".
+<#1eac7a7c-8bcc-41f7-94f2-f3a1e0ad4480> a <https://schema.org/HowToStep>;
+    <https://schema.org/position> 7;
+    <https://schema.org/text> "TIP: Insurance policy – If you didn't use a non stick pan, slide the rubber spatular underneath all the way to the middle and run it around, to be 100% sure nothing is stuck before attempting flip.".
+<#f9478c05-520e-4bfe-88fa-13c316be40c6> a <https://schema.org/HowToStep>;
+    <https://schema.org/position> 8;
+    <https://schema.org/text> "Flip: Cover pan with a round wooden board with a handle (or anything similar with a handle, Note 3). Holding the handle of the board, flip quickly – and with confidence!".
+<#6191cfc3-09d9-47f1-a95e-4f7b77a57909> a <https://schema.org/HowToStep>;
+    <https://schema.org/position> 9;
+    <https://schema.org/text> "Cook second side: Melt remaining clarified butter in the pan, then slide the rosti back in and cook for 12 minutes until golden crispy, and there is no resistance when a knife is inserted into the middle.".
+<#809c04c8-2182-4d5d-a637-23fe23ccb0f1> a <https://schema.org/HowToStep>;
+    <https://schema.org/position> 10;
+    <https://schema.org/text> "Slide onto cutting board, cut into 4 or 6 wedges and serve immediately!".
+<#it-metadata> a <https://vocab.noeldemartin.com/crdt/Metadata>;
+    <https://vocab.noeldemartin.com/crdt/createdAt> "2024-10-06T02:25:03.845Z"^^<http://www.w3.org/2001/XMLSchema#dateTime>;
+    <https://vocab.noeldemartin.com/crdt/resource> <#it>;
+    <https://vocab.noeldemartin.com/crdt/updatedAt> "2024-12-01T07:46:57.825Z"^^<http://www.w3.org/2001/XMLSchema#dateTime>.
+<#it-operation-15d55329-6dd6-4550-87ff-11fe4ddf9d0c> a <https://vocab.noeldemartin.com/crdt/SetPropertyOperation>;
+    <https://vocab.noeldemartin.com/crdt/resource> <#it>;
+    <https://vocab.noeldemartin.com/crdt/date> "2024-10-06T02:25:03.845Z"^^<http://www.w3.org/2001/XMLSchema#dateTime>;
+    <https://vocab.noeldemartin.com/crdt/property> <https://schema.org/cookTime>;
+    <https://vocab.noeldemartin.com/crdt/value> "PT25M".
+<#it-operation-223582e9-e2b9-47e6-a475-caaeca343340> a <https://vocab.noeldemartin.com/crdt/SetPropertyOperation>;
+    <https://vocab.noeldemartin.com/crdt/resource> <#it>;
+    <https://vocab.noeldemartin.com/crdt/date> "2024-10-06T02:25:03.845Z"^^<http://www.w3.org/2001/XMLSchema#dateTime>;
+    <https://vocab.noeldemartin.com/crdt/property> <https://schema.org/image>;
+    <https://vocab.noeldemartin.com/crdt/value> <https://www.recipetineats.com/tachyon/2020/10/Potato-Rosti_2-SQ.jpg>.
+<#it-operation-571e6496-0921-484f-b776-db13145395b4> a <https://vocab.noeldemartin.com/crdt/SetPropertyOperation>;
+    <https://vocab.noeldemartin.com/crdt/resource> <#it>;
+    <https://vocab.noeldemartin.com/crdt/date> "2024-10-06T02:25:03.845Z"^^<http://www.w3.org/2001/XMLSchema#dateTime>;
+    <https://vocab.noeldemartin.com/crdt/property> <https://schema.org/recipeInstructions>;
+    <https://vocab.noeldemartin.com/crdt/value> <#887eb323-f7d3-4c13-87bb-7e09128e5d0d>, <#6e518c53-0854-4b7c-b1a3-74d2866e23f1>, <#aeae9ca8-07f2-43cc-8ed9-9bf8e3c79552>, <#9a33df9a-6224-4b7d-9434-c7891c7abcd9>.
+<#it-operation-9e44f0cd-c0b2-4cf7-a725-a572c69571ad> a <https://vocab.noeldemartin.com/crdt/SetPropertyOperation>;
+    <https://vocab.noeldemartin.com/crdt/resource> <#it>;
+    <https://vocab.noeldemartin.com/crdt/date> "2024-10-06T02:25:03.845Z"^^<http://www.w3.org/2001/XMLSchema#dateTime>;
+    <https://vocab.noeldemartin.com/crdt/property> <https://schema.org/sameAs>;
+    <https://vocab.noeldemartin.com/crdt/value> <https://www.recipetineats.com/potato-rosti/>.
+<#it-operation-add7b192-cecb-4806-beca-d2f1bc04a580> a <https://vocab.noeldemartin.com/crdt/SetPropertyOperation>;
+    <https://vocab.noeldemartin.com/crdt/resource> <#it>;
+    <https://vocab.noeldemartin.com/crdt/date> "2024-10-06T02:25:03.845Z"^^<http://www.w3.org/2001/XMLSchema#dateTime>;
+    <https://vocab.noeldemartin.com/crdt/property> <https://schema.org/recipeYield>;
+    <https://vocab.noeldemartin.com/crdt/value> "4,4 - 6 people".
+<#it-operation-adf39e41-2652-4731-a5f7-73c23ac52480> a <https://vocab.noeldemartin.com/crdt/SetPropertyOperation>;
+    <https://vocab.noeldemartin.com/crdt/resource> <#it>;
+    <https://vocab.noeldemartin.com/crdt/date> "2024-10-06T02:25:03.845Z"^^<http://www.w3.org/2001/XMLSchema#dateTime>;
+    <https://vocab.noeldemartin.com/crdt/property> <https://schema.org/prepTime>;
+    <https://vocab.noeldemartin.com/crdt/value> "PT10M".
+<#it-operation-de19bf7d-be0c-4257-bec7-10089cdee1e6> a <https://vocab.noeldemartin.com/crdt/SetPropertyOperation>;
+    <https://vocab.noeldemartin.com/crdt/resource> <#it>;
+    <https://vocab.noeldemartin.com/crdt/date> "2024-10-06T02:25:03.845Z"^^<http://www.w3.org/2001/XMLSchema#dateTime>;
+    <https://vocab.noeldemartin.com/crdt/property> <https://schema.org/name>;
+    <https://vocab.noeldemartin.com/crdt/value> "Crispy Potato Rosti".
+<#it-operation-ded3546a-0282-4a46-a4f5-098fa1fa1d0d> a <https://vocab.noeldemartin.com/crdt/SetPropertyOperation>;
+    <https://vocab.noeldemartin.com/crdt/resource> <#it>;
+    <https://vocab.noeldemartin.com/crdt/date> "2024-10-06T02:25:03.845Z"^^<http://www.w3.org/2001/XMLSchema#dateTime>;
+    <https://vocab.noeldemartin.com/crdt/property> <https://schema.org/recipeIngredient>;
+    <https://vocab.noeldemartin.com/crdt/value> "1kg/ 2 lb  potatoes (skin on weight) ( - Aus: Sebago (dirt brushed), US: Yukon Gold, Russet, UK: Maris Piper, King Edwards (Note 1))", "60g/ 4 tbsp   clarified butter / ghee (, separated (sub half butter, half vegetable oil) (Note 2))", "3/4 tsp salt (, kosher/cooking salt (or 1/2 tsp table salt))", "15g/ 1 tbsp  clarified butter / ghee or normal butter (, melted (Note 2))", "1/2 tsp finely ground black pepper".
+<#it-operation-efc5cae5-c624-42dc-bf2c-ea167f61cce8> a <https://vocab.noeldemartin.com/crdt/SetPropertyOperation>;
+    <https://vocab.noeldemartin.com/crdt/resource> <#it>;
+    <https://vocab.noeldemartin.com/crdt/date> "2024-10-06T02:25:03.845Z"^^<http://www.w3.org/2001/XMLSchema#dateTime>;
+    <https://vocab.noeldemartin.com/crdt/property> <https://schema.org/description>;
+    <https://vocab.noeldemartin.com/crdt/value> "Recipe video above. This is a recipe for truly crispy Potato Rosti that&#39;s beautifully golden on the outside and fluffy on the inside. The secret is pan frying in the right fat! Butter = tasty but not crispy. Oil = crispy but flavourless. The Swiss cracked the code - use clarified butter (or ghee!). Buy it or make your own (it&#39;s super easy).And if you want ultra ultra crispy, make small thin ones instead - they are literally potato crisp crispy!This recipe would probably serve 6 normal people, but in my family it serves 4. Makes 1 giant rosti about 2cm / 4/5&quot; thick, or 10 - 12 small rostis.".
+<#it-operation-b800fef1-114b-485d-ac49-519d2afa1622> a <https://vocab.noeldemartin.com/crdt/RemovePropertyOperation>;
+    <https://vocab.noeldemartin.com/crdt/resource> <#it>;
+    <https://vocab.noeldemartin.com/crdt/date> "2024-10-27T09:01:28.953Z"^^<http://www.w3.org/2001/XMLSchema#dateTime>;
+    <https://vocab.noeldemartin.com/crdt/property> <https://schema.org/recipeInstructions>;
+    <https://vocab.noeldemartin.com/crdt/value> <#887eb323-f7d3-4c13-87bb-7e09128e5d0d>, <#6e518c53-0854-4b7c-b1a3-74d2866e23f1>, <#aeae9ca8-07f2-43cc-8ed9-9bf8e3c79552>, <#9a33df9a-6224-4b7d-9434-c7891c7abcd9>.
+<#a15ba1b6-b806-4067-a47e-82d156f10112-metadata> a <https://vocab.noeldemartin.com/crdt/Metadata>;
+    <https://vocab.noeldemartin.com/crdt/createdAt> "2024-10-27T09:02:05.125Z"^^<http://www.w3.org/2001/XMLSchema#dateTime>;
+    <https://vocab.noeldemartin.com/crdt/resource> <#a15ba1b6-b806-4067-a47e-82d156f10112>;
+    <https://vocab.noeldemartin.com/crdt/updatedAt> "2024-10-27T09:02:05.125Z"^^<http://www.w3.org/2001/XMLSchema#dateTime>.
+<#it-operation-751934e6-4b72-44ba-9791-508723284791> a <https://vocab.noeldemartin.com/crdt/AddPropertyOperation>;
+    <https://vocab.noeldemartin.com/crdt/resource> <#it>;
+    <https://vocab.noeldemartin.com/crdt/date> "2024-10-27T09:02:05.115Z"^^<http://www.w3.org/2001/XMLSchema#dateTime>;
+    <https://vocab.noeldemartin.com/crdt/property> <https://schema.org/recipeInstructions>;
+    <https://vocab.noeldemartin.com/crdt/value> <#a15ba1b6-b806-4067-a47e-82d156f10112>.
+<#326442fa-e513-4190-82d6-19028ac2c81d-metadata> a <https://vocab.noeldemartin.com/crdt/Metadata>;
+    <https://vocab.noeldemartin.com/crdt/createdAt> "2024-10-27T09:04:12.741Z"^^<http://www.w3.org/2001/XMLSchema#dateTime>;
+    <https://vocab.noeldemartin.com/crdt/resource> <#326442fa-e513-4190-82d6-19028ac2c81d>;
+    <https://vocab.noeldemartin.com/crdt/updatedAt> "2024-10-27T09:04:12.741Z"^^<http://www.w3.org/2001/XMLSchema#dateTime>.
+<#a5ba1ea3-df34-42b7-bcab-7ef33c9f518b-metadata> a <https://vocab.noeldemartin.com/crdt/Metadata>;
+    <https://vocab.noeldemartin.com/crdt/createdAt> "2024-10-27T09:04:12.742Z"^^<http://www.w3.org/2001/XMLSchema#dateTime>;
+    <https://vocab.noeldemartin.com/crdt/resource> <#a5ba1ea3-df34-42b7-bcab-7ef33c9f518b>;
+    <https://vocab.noeldemartin.com/crdt/updatedAt> "2024-10-27T09:04:12.742Z"^^<http://www.w3.org/2001/XMLSchema#dateTime>.
+<#e7395b70-cf10-4924-abd4-1f2a58935b6b-metadata> a <https://vocab.noeldemartin.com/crdt/Metadata>;
+    <https://vocab.noeldemartin.com/crdt/createdAt> "2024-10-27T09:04:12.742Z"^^<http://www.w3.org/2001/XMLSchema#dateTime>;
+    <https://vocab.noeldemartin.com/crdt/resource> <#e7395b70-cf10-4924-abd4-1f2a58935b6b>;
+    <https://vocab.noeldemartin.com/crdt/updatedAt> "2024-10-27T09:29:42.672Z"^^<http://www.w3.org/2001/XMLSchema#dateTime>.
+<#df9982bb-5a79-4cc4-9533-3ec686f573e4-metadata> a <https://vocab.noeldemartin.com/crdt/Metadata>;
+    <https://vocab.noeldemartin.com/crdt/createdAt> "2024-10-27T09:04:12.743Z"^^<http://www.w3.org/2001/XMLSchema#dateTime>;
+    <https://vocab.noeldemartin.com/crdt/resource> <#df9982bb-5a79-4cc4-9533-3ec686f573e4>;
+    <https://vocab.noeldemartin.com/crdt/updatedAt> "2024-10-27T09:04:12.743Z"^^<http://www.w3.org/2001/XMLSchema#dateTime>.
+<#cfe5646f-c96b-4a1f-b465-fda41cf5e3dc-metadata> a <https://vocab.noeldemartin.com/crdt/Metadata>;
+    <https://vocab.noeldemartin.com/crdt/createdAt> "2024-10-27T09:04:12.743Z"^^<http://www.w3.org/2001/XMLSchema#dateTime>;
+    <https://vocab.noeldemartin.com/crdt/resource> <#cfe5646f-c96b-4a1f-b465-fda41cf5e3dc>;
+    <https://vocab.noeldemartin.com/crdt/updatedAt> "2024-10-27T09:04:12.743Z"^^<http://www.w3.org/2001/XMLSchema#dateTime>.
+<#1eac7a7c-8bcc-41f7-94f2-f3a1e0ad4480-metadata> a <https://vocab.noeldemartin.com/crdt/Metadata>;
+    <https://vocab.noeldemartin.com/crdt/createdAt> "2024-10-27T09:04:12.743Z"^^<http://www.w3.org/2001/XMLSchema#dateTime>;
+    <https://vocab.noeldemartin.com/crdt/resource> <#1eac7a7c-8bcc-41f7-94f2-f3a1e0ad4480>;
+    <https://vocab.noeldemartin.com/crdt/updatedAt> "2024-10-27T09:04:12.743Z"^^<http://www.w3.org/2001/XMLSchema#dateTime>.
+<#f9478c05-520e-4bfe-88fa-13c316be40c6-metadata> a <https://vocab.noeldemartin.com/crdt/Metadata>;
+    <https://vocab.noeldemartin.com/crdt/createdAt> "2024-10-27T09:04:12.744Z"^^<http://www.w3.org/2001/XMLSchema#dateTime>;
+    <https://vocab.noeldemartin.com/crdt/resource> <#f9478c05-520e-4bfe-88fa-13c316be40c6>;
+    <https://vocab.noeldemartin.com/crdt/updatedAt> "2024-10-27T09:04:12.744Z"^^<http://www.w3.org/2001/XMLSchema#dateTime>.
+<#6191cfc3-09d9-47f1-a95e-4f7b77a57909-metadata> a <https://vocab.noeldemartin.com/crdt/Metadata>;
+    <https://vocab.noeldemartin.com/crdt/createdAt> "2024-10-27T09:04:12.744Z"^^<http://www.w3.org/2001/XMLSchema#dateTime>;
+    <https://vocab.noeldemartin.com/crdt/resource> <#6191cfc3-09d9-47f1-a95e-4f7b77a57909>;
+    <https://vocab.noeldemartin.com/crdt/updatedAt> "2024-10-27T09:04:12.744Z"^^<http://www.w3.org/2001/XMLSchema#dateTime>.
+<#809c04c8-2182-4d5d-a637-23fe23ccb0f1-metadata> a <https://vocab.noeldemartin.com/crdt/Metadata>;
+    <https://vocab.noeldemartin.com/crdt/createdAt> "2024-10-27T09:04:12.744Z"^^<http://www.w3.org/2001/XMLSchema#dateTime>;
+    <https://vocab.noeldemartin.com/crdt/resource> <#809c04c8-2182-4d5d-a637-23fe23ccb0f1>;
+    <https://vocab.noeldemartin.com/crdt/updatedAt> "2024-10-27T09:04:12.744Z"^^<http://www.w3.org/2001/XMLSchema#dateTime>.
+<#it-operation-356af23b-339a-48ae-8209-67c0bc9e45a3> a <https://vocab.noeldemartin.com/crdt/AddPropertyOperation>;
+    <https://vocab.noeldemartin.com/crdt/resource> <#it>;
+    <https://vocab.noeldemartin.com/crdt/date> "2024-10-27T09:04:12.717Z"^^<http://www.w3.org/2001/XMLSchema#dateTime>;
+    <https://vocab.noeldemartin.com/crdt/property> <https://schema.org/recipeInstructions>;
+    <https://vocab.noeldemartin.com/crdt/value> <#326442fa-e513-4190-82d6-19028ac2c81d>, <#a5ba1ea3-df34-42b7-bcab-7ef33c9f518b>, <#e7395b70-cf10-4924-abd4-1f2a58935b6b>, <#df9982bb-5a79-4cc4-9533-3ec686f573e4>, <#cfe5646f-c96b-4a1f-b465-fda41cf5e3dc>, <#1eac7a7c-8bcc-41f7-94f2-f3a1e0ad4480>, <#f9478c05-520e-4bfe-88fa-13c316be40c6>, <#6191cfc3-09d9-47f1-a95e-4f7b77a57909>, <#809c04c8-2182-4d5d-a637-23fe23ccb0f1>.
+<#e7395b70-cf10-4924-abd4-1f2a58935b6b-operation-7599216e-4489-4f7a-a372-118c33591fee> a <https://vocab.noeldemartin.com/crdt/SetPropertyOperation>;
+    <https://vocab.noeldemartin.com/crdt/resource> <#e7395b70-cf10-4924-abd4-1f2a58935b6b>;
+    <https://vocab.noeldemartin.com/crdt/date> "2024-10-27T09:04:12.742Z"^^<http://www.w3.org/2001/XMLSchema#dateTime>;
+    <https://vocab.noeldemartin.com/crdt/property> <https://schema.org/position>;
+    <https://vocab.noeldemartin.com/crdt/value> 4.
+<#e7395b70-cf10-4924-abd4-1f2a58935b6b-operation-9850dd24-deb2-4bfa-a295-f29d5f248a69> a <https://vocab.noeldemartin.com/crdt/SetPropertyOperation>;
+    <https://vocab.noeldemartin.com/crdt/resource> <#e7395b70-cf10-4924-abd4-1f2a58935b6b>;
+    <https://vocab.noeldemartin.com/crdt/date> "2024-10-27T09:04:12.742Z"^^<http://www.w3.org/2001/XMLSchema#dateTime>;
+    <https://vocab.noeldemartin.com/crdt/property> <https://schema.org/text>;
+    <https://vocab.noeldemartin.com/crdt/value> "Melt half the clarified butter in a 26cm / 10.5\" (or thereabouts) non-stick pan or skillet over medium low heat. Shallow non-stick pan with sloped sides is best for easy rosti removal.".
+<#e7395b70-cf10-4924-abd4-1f2a58935b6b-operation-7cfb4822-f670-48f9-98b9-d84a865266cd> a <https://vocab.noeldemartin.com/crdt/SetPropertyOperation>;
+    <https://vocab.noeldemartin.com/crdt/resource> <#e7395b70-cf10-4924-abd4-1f2a58935b6b>;
+    <https://vocab.noeldemartin.com/crdt/date> "2024-10-27T09:29:42.672Z"^^<http://www.w3.org/2001/XMLSchema#dateTime>;
+    <https://vocab.noeldemartin.com/crdt/property> <https://schema.org/text>;
+    <https://vocab.noeldemartin.com/crdt/value> "Melt half the clarified butter in a 26cm / 10.5\" (or thereabouts) non-stick pan or skillet over medium low heat. Shallow non-stick pan with sloped sides is best for easy rosti removal. / Use stainless steel pan on 3. Make sure pan is hot with water drops skidding before adding butter.".
+<#it-operation-846ed0be-007f-4faf-818f-c7ea37238c58> a <https://vocab.noeldemartin.com/crdt/SetPropertyOperation>;
+    <https://vocab.noeldemartin.com/crdt/resource> <#it>;
+    <https://vocab.noeldemartin.com/crdt/date> "2024-12-01T07:46:57.825Z"^^<http://www.w3.org/2001/XMLSchema#dateTime>;
+    <https://vocab.noeldemartin.com/crdt/property> <https://schema.org/description>;
+    <https://vocab.noeldemartin.com/crdt/value> "This is a recipe for truly crispy Potato Rosti that's beautifully golden on the outside and fluffy on the inside. The secret is pan frying in the right fat! Butter = tasty but not crispy. Oil = crispy but flavourless. The Swiss cracked the code - use clarified butter (or ghee!).And if you want ultra ultra crispy, make small thin ones instead - they are literally potato crisp crispy! This recipe would probably serve 6 normal people, but in my family it serves 4. Makes 1 giant rosti about 2cm / 4/5&quot; thick, or 10 - 12 small rostis.".

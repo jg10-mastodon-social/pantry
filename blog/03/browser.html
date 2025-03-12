@@ -1,0 +1,69 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Browser app - part 3</title>
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, minimum-scale=1.0"
+    />
+    <script
+      type="module"
+      src="https://cdn.jsdelivr.net/npm/@pod-os/elements/dist/elements/elements.esm.js"
+    ></script>
+    <link
+      href="https://cdn.jsdelivr.net/npm/@pod-os/elements/dist/elements/elements.css"
+      rel="stylesheet"
+    />
+    <script
+      src="https://cdn.jsdelivr.net/npm/eruda"
+      onload="eruda.init()"
+    ></script>
+    <script
+      src="https://king-cello.bnr.la/scripts/ReceiveResourceOS.js"
+      defer=""
+    ></script>
+    <script
+      src="https://king-cello.bnr.la/scripts/loadElement.js"
+      defer=""
+    ></script>
+    <script>
+      window.addEventListener("DOMContentLoaded", () => {
+        document.body.addEventListener("pod-os:route-changed", (e) => {
+          let uri = e.detail;
+          if (
+            !uri.startsWith(
+              "https://jg10.solidcommunity.net/pantry/blog/02/browser.html",
+            )
+          ) {
+            document.querySelector("#main").uri = uri;
+            document.querySelector("pos-navigation-bar").uri = uri;
+          }
+        });
+        setupLazyLoadComponents();
+      });
+    </script>
+  </head>
+  <body>
+    <pos-app>
+      <!-- force loading prefs - would usually be loaded during login -->
+      <pos-resource
+        uri="https://jg10.solidcommunity.net/pantry/blog/03/prefs.ttl"
+      ></pos-resource>
+      <pos-router mode="pod">
+        <ion-content>
+          <pos-navigation-bar
+            uri="https://jg10.solidcommunity.net/pantry/blog/03/rosti.ttl#it"
+          ></pos-navigation-bar>
+          <pos-resource
+            id="main"
+            uri="https://jg10.solidcommunity.net/pantry/blog/03/rosti.ttl#it"
+          >
+            <open-with></open-with>
+            <registered-pane></registered-pane>
+            <pos-type-router></pos-type-router>
+          </pos-resource>
+        </ion-content>
+      </pos-router>
+    </pos-app>
+  </body>
+</html>

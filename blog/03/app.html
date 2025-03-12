@@ -1,0 +1,84 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Pantry app - part 3</title>
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, minimum-scale=1.0"
+    />
+    <script
+      type="module"
+      src="https://cdn.jsdelivr.net/npm/@pod-os/elements/dist/elements/elements.esm.js"
+    ></script>
+    <link
+      href="https://cdn.jsdelivr.net/npm/@pod-os/elements/dist/elements/elements.css"
+      rel="stylesheet"
+    />
+    <script
+      src="https://cdn.jsdelivr.net/npm/eruda"
+      onload="eruda.init()"
+    ></script>
+    <script
+      src="https://king-cello.bnr.la/scripts/ReceiveResourceOS.js"
+      defer=""
+    ></script>
+    <script
+      src="https://king-cello.bnr.la/scripts/loadElement.js"
+      defer=""
+    ></script>
+    <!-- TODO should be autoloaded -->
+    <script src="https://king-cello.bnr.la/scripts/set.js" defer=""></script>
+    <script>
+      window.addEventListener("DOMContentLoaded", () => {
+        document.body.addEventListener("pod-os:route-changed", (e) => {
+          let uri = e.detail;
+          if (
+            !uri.startsWith(
+              "https://jg10.solidcommunity.net/pantry/blog/03/app.html",
+            )
+          ) {
+            document.querySelector("#main").uri = uri;
+            document.querySelector("pos-navigation-bar").uri = uri;
+          }
+        });
+        setupLazyLoadComponents();
+      });
+    </script>
+  </head>
+  <body>
+    <pos-app>
+      <!--
+      <pos-login></pos-login>
+      -->
+      <pos-router mode="pod">
+        <ion-content>
+          <pos-navigation-bar
+            uri="https://jg10.solidcommunity.net/pantry/blog/03/rosti.ttl#it"
+          ></pos-navigation-bar>
+          <pos-resource
+            id="main"
+            uri="https://jg10.solidcommunity.net/pantry/blog/03/rosti.ttl#it"
+            prefix="sosa: http://www.w3.org/ns/sosa/ schema: https://schema.org/ rdfs: http://www.w3.org/2000/01/rdf-schema# dcterms: http://purl.org/dc/terms/ rdf: http://www.w3.org/1999/02/22-rdf-syntax-ns# prov: https://www.w3.org/ns/prov# oa: http://www.w3.org/ns/oa# ldp: http://www.w3.org/ns/ldp# pantry: https://jg10.solidcommunity.net/pantry/terms.ttl#"
+          >
+            <show-if if-else>
+              <template if-typeof="schema:Recipe" src="recipe.html"></template>
+              <template
+                else
+                if-typeof="schema:Product"
+                src="product.html"
+              ></template>
+              <template
+                else
+                if-typeof="pantry:Pantry"
+                src="pantry-index.html"
+              ></template>
+              <template else>
+                <pos-type-router></pos-type-router>
+              </template>
+            </show-if>
+          </pos-resource>
+        </ion-content>
+      </pos-router>
+    </pos-app>
+  </body>
+</html>

@@ -1,0 +1,53 @@
+<div
+  class="ion-padding-horizontal"
+  prefix="sosa: http://www.w3.org/ns/sosa/ schema: https://schema.org/ rdfs: http://www.w3.org/2000/01/rdf-schema# dcterms: http://purl.org/dc/terms/ rdf: http://www.w3.org/1999/02/22-rdf-syntax-ns# prov: https://www.w3.org/ns/prov# oa: http://www.w3.org/ns/oa# ldp: http://www.w3.org/ns/ldp#"
+>
+  <pos-picture></pos-picture>
+  <h2>
+    <my-editable-literal property="schema:name"></my-editable-literal>
+  </h2>
+  <p>
+    <small>
+      <my-list property="schema:sameAs">
+        <template name="item">
+          <my-link><pos-label></pos-label></my-link>&nbsp;
+        </template>
+      </my-list>
+    </small>
+  </p>
+  <p>
+    <my-editable-literal property="schema:description"></my-editable-literal>
+  </p>
+  <p>
+    Prep time
+    <my-editable-literal property="schema:prepTime"></my-editable-literal>
+  </p>
+  <p>
+    Cooktime
+    <my-editable-literal property="schema:cookTime"></my-editable-literal>
+  </p>
+  <p>
+    Yield
+    <my-editable-literal property="schema:recipeYield"></my-editable-literal>
+  </p>
+  <h2>Ingredients</h2>
+  <p>
+    <my-list property="schema:recipeIngredient">
+      <template name="item">
+        <li>
+          <my-editable-literal
+            property="schema:recipeIngredient"
+          ></my-editable-literal>
+        </li>
+      </template>
+    </my-list>
+  </p>
+  <h2>Instructions</h2>
+  <my-list property="schema:recipeInstructions" sort="schema:position">
+    <template name="item">
+      <li>
+        <my-editable-literal property="schema:text"></my-editable-literal>
+      </li>
+    </template>
+  </my-list>
+</div>
