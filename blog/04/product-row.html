@@ -1,0 +1,22 @@
+<style>
+  .product-table {
+         display:grid;
+         grid-template-columns:1fr 10ch 10ch;
+         margin-left:5px;
+         margin-right:5px;
+         max-width:400px;
+     }
+</style>
+<ion-item>
+  <ion-label>
+    <div class="product-table">
+      <div><pos-label></pos-label><my-link>&rarr;</my-link></div>
+      <div>
+        <my-classifier
+          property="pantry:approxQuantity"
+          category="pantry:ProductApproxQuantity"
+        ></my-classifier>
+      </div>
+    </div>
+  </ion-label>
+</ion-item>

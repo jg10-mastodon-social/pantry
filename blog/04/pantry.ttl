@@ -1,0 +1,18 @@
+@prefix : <#>.
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>.
+@prefix ter: <../../terms.ttl#>.
+@prefix schem: <https://schema.org/>.
+@prefix sos: <http://www.w3.org/ns/sosa/>.
+
+<> a ter:Pantry.
+
+:1638629734460861
+    a ter:Perishable, schem:Product;
+    ter:approxQuantity ter:Lots;
+    schem:name "Potatoes".
+:8119875242222632
+a ter:Staple, schem:Product; ter:approxQuantity ter:None; schem:name "Butter".
+:Cellar
+a sos:FeatureOfInterest; rdfs:label "Cellar"; ter:contains :1638629734460861 .
+:Fridge
+a sos:FeatureOfInterest; rdfs:label "Fridge"; ter:contains :8119875242222632 .

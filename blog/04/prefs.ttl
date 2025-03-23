@@ -1,0 +1,38 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix ui: <http://www.w3.org/ns/ui#> .
+@prefix solid: <http://www.w3.org/ns/solid/terms#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix apps: <https://jg10.solidcommunity.net/open-with/apps.ttl#> .
+@prefix schem: <https://schema.org/> .
+@prefix ldp: <http://www.w3.org/ns/ldp#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix pantry: <https://jg10.solidcommunity.net/pantry/terms.ttl#>.
+
+<#Recipes>
+    a solid:TypeRegistration ;
+    solid:forClass schem:Recipe ;
+    apps:panes <#RecipePane>;
+    solid:instanceContainer <https://jg10.solidcommunity.net/pantry/blog/04/> ;
+    apps:apps <#UmaiViewer> .
+    
+<#RecipePane> apps:podOsHtmlUrl <https://jg10.solidcommunity.net/pantry/blog/04/recipe.html>.
+
+<#UmaiViewer>
+    rdfs:label "Umai viewer" ;
+    apps:uriPrefix "https://umai.noeldemartin.com/viewer?url=" .
+
+<#Products>
+a solid:TypeRegistration;
+solid:forClass schem:Product;
+apps:panes <#ProductPane>.
+
+
+<#ProductPane> apps:podOsHtmlUrl <https://jg10.solidcommunity.net/pantry/blog/04/product.html>.
+
+<#Pantry> 
+a solid:TypeRegistration;
+solid:forClass pantry:Pantry;
+apps:panes <#PantryPane>.
+
+
+<#PantryPane> apps:podOsHtmlUrl <https://jg10.solidcommunity.net/pantry/blog/04/pantry-index.html>.

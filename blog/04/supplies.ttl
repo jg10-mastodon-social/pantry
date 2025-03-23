@@ -1,0 +1,26 @@
+@prefix : <#>.
+@prefix ros: <rosti.ttl#>.
+@prefix schem: <https://schema.org/>.
+@prefix p: <pantry.ttl#>.
+
+ros:it schem:supply :1741337498953, :1741337649657 .
+
+:RecipeList a schem:ItemList;
+schem:name "Pantry app demo recipe list";
+schem:itemListElement :rosti.
+
+:rosti a <https://schema.org/ListItem>;
+    <https://schema.org/item> ros:it.
+
+:1741337498953 
+a schem:HowToSupply;
+    schem:item p:1638629734460861;
+    schem:name
+        "1kg/ 2 lb potatoes (skin on weight) ( - Aus: Sebago (dirt brushed), US: Yukon Gold, Russet, UK: Maris Piper, King Edwards (Note 1))";
+    schem:position "1".
+:1741337649657
+a schem:HowToSupply;
+    schem:item p:8119875242222632;
+    schem:name
+        "60g/ 4 tbsp clarified butter / ghee (, separated (sub half butter, half vegetable oil) (Note 2))";
+    schem:position "2".

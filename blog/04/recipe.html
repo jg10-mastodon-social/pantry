@@ -1,0 +1,115 @@
+<div
+  class="ion-padding-horizontal"
+  prefix="sosa: http://www.w3.org/ns/sosa/ schema: https://schema.org/ rdfs: http://www.w3.org/2000/01/rdf-schema# dcterms: http://purl.org/dc/terms/ rdf: http://www.w3.org/1999/02/22-rdf-syntax-ns# prov: https://www.w3.org/ns/prov# oa: http://www.w3.org/ns/oa# ldp: http://www.w3.org/ns/ldp# pantry: https://jg10.solidcommunity.net/pantry/terms.ttl#"
+>
+  <pos-picture></pos-picture>
+  <h2>
+    <my-editable-literal property="schema:name"></my-editable-literal>
+  </h2>
+  <p>
+    <small>
+      <my-list property="schema:sameAs">
+        <template name="item">
+          <my-link><pos-label></pos-label></my-link>&nbsp;
+        </template>
+      </my-list>
+    </small>
+  </p>
+  <p>
+    <my-editable-literal property="schema:description"></my-editable-literal>
+  </p>
+  <p>
+    Prep time
+    <my-editable-literal property="schema:prepTime"></my-editable-literal>
+  </p>
+  <p>
+    Cooktime
+    <my-editable-literal property="schema:cookTime"></my-editable-literal>
+  </p>
+  <p>
+    Yield
+    <my-editable-literal property="schema:recipeYield"></my-editable-literal>
+  </p>
+  <h2>Ingredients</h2>
+  <p>
+    <my-list property="schema:recipeIngredient">
+      <template name="item">
+        <li>
+          <my-editable-literal
+            property="schema:recipeIngredient"
+          ></my-editable-literal>
+        </li>
+      </template>
+    </my-list>
+  </p>
+  <h2>Supplies</h2>
+  <p>
+    <when-loaded
+      uri="https://jg10.solidcommunity.net/pantry/blog/04/supplies.ttl"
+      update="#recipe-supplies"
+    ></when-loaded>
+    <when-loaded
+      uri="https://jg10.solidcommunity.net/pantry/terms.ttl"
+      update="#recipe-supplies"
+    ></when-loaded>
+    <ion-list>
+      <my-list
+        id="recipe-supplies"
+        property="schema:supply"
+        sort="schema:position"
+        typeof="schema:HowToSupply"
+        add-new
+        doc="https://jg10.solidcommunity.net/pantry/blog/04/supplies.ttl"
+      >
+        <template name="item">
+          <ion-card>
+            <ion-card-header>
+              <my-editable-literal
+                placeholder
+                property="schema:name"
+              ></my-editable-literal>
+            </ion-card-header>
+            <ion-card-content>
+              #<my-editable-literal
+                property="schema:position"
+                placeholder
+              ></my-editable-literal>
+              <see-also
+                property="schema:item"
+                update=".item-autocomplete,.item-list"
+              ></see-also>
+              <autocomplete-input
+                class="item-autocomplete"
+                property="schema:item"
+                category="schema:Product"
+              ></autocomplete-input>
+              <my-list class="item-list" property="schema:item">
+                <template name="item">
+                  <ion-item>
+                    <my-editable-literal
+                      property="schema:name"
+                    ></my-editable-literal>
+                    &nbsp;<my-link>&rarr;</my-link>
+                    <ion-badge slot="end">
+                      <my-property property="pantry:approxQuantity">
+                        <pos-label></pos-label>
+                      </my-property>
+                    </ion-badge>
+                  </ion-item>
+                </template>
+              </my-list>
+            </ion-card-content>
+          </ion-card>
+        </template>
+      </my-list>
+    </ion-list>
+  </p>
+  <h2>Instructions</h2>
+  <my-list property="schema:recipeInstructions" sort="schema:position">
+    <template name="item">
+      <li>
+        <my-editable-literal property="schema:text"></my-editable-literal>
+      </li>
+    </template>
+  </my-list>
+</div>

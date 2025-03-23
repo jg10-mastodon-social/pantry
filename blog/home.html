@@ -37,8 +37,9 @@
         href="https://jg10.solidcommunity.net/devlog/home.html?uri=https%3A%2F%2Fjg10.solidcommunity.net%2Fdevlog%2Fnow.ttl%23Pantry"
         >working</a
       >
-      on a pantry app. I want to use recipes compatible with Umai, but connected
-      with a record of what ingredients are in the house. I have a more or less
+      on a pantry app. I want to use recipes compatible with
+      <a href="https://umai.noeldemartin.com">Umai</a>, but connected with a
+      record of what ingredients are in the house. I have a more or less
       functional version that I've started using in my home. It's rough around
       the edges and I keep thinking of new functionality that would improve its
       usability. But that's a key part of why I've built it the way I have - the
@@ -282,7 +283,22 @@
       </figcaption>
     </figure>
     <h2 id="part3">Part 3: Going beyond the Umai data model</h2>
-    <small>Updated 7 Mar 2025</small>
+    <small>Published 7 Mar 2025. Last updated 12 Mar 2025</small>
+    <br />
+    <details>
+      <summary>Changes</summary>
+      <ul>
+        <li>
+          12 Mar 2025: add clarification of <code>pantry:</code> namespace
+        </li>
+        <li>
+          12 Mar 2025: use
+          <code>schema:name</code>
+          instead of
+          <code>rdfs:label</code>
+        </li>
+      </ul>
+    </details>
     <p>In this part, we're going to add the features:</p>
     <ul>
       <li>Define groceries [...]</li>
@@ -291,9 +307,23 @@
       <li>List recipes using the grocery as an ingredient.</li>
       <li>See whether the ingredients for a recipe are available</li>
     </ul>
+    <p>
+      To do this, we need to go beyond Umai's data model. We'll reuse other
+      existing vocabularies where we can. Where new terms are needed, we'll use
+      the
+      <code>pantry:</code> prefix, mapped to
+      <code>https://jg10.solidcommunity.net/pantry/terms.ttl#</code>. The
+      general philosophy here is to not allow missing terms to get in the way of
+      experimentation - minting new terms is trivially easy. If a set of terms
+      turns out to be of high value, they can then be formally documented, and
+      at that point a
+      <a href="https://www.w3.org/Provider/Style/URI">permanent</a> home can be
+      found. In the mean time, interoperability will still need to be
+      considered. We'll return to this later.
+    </p>
     <h3>Groceries</h3>
     <p>
-      To do this, we need to go beyond Umai's data model. A grocery will be a
+      A grocery will be a
       <code>schema:Product</code>. We'll define a new predicate for approximate
       quantity of a grocery and named individuals
       <code> None, Low, Some, Many </code>
@@ -301,7 +331,7 @@
     </p>
     <pre><code>
 :1638629734460861 a schema:Product; 
-rdfs:label "Potatoes"; 
+schema:name "Potatoes"; 
 pantry:approxQuantity pantry:None.
       </code></pre>
     <p>
@@ -339,7 +369,7 @@ pantry:approxQuantity pantry:None.
           >app with product pane</a
         >
       </li>
-      <li><a href="03/pantry.html">pantry pane</a></li>
+      <li><a href="03/pantry-index.html">pantry pane</a></li>
       <li><a href="03/product.html">product pane</a></li>
       <li><a href="03/pantry.ttl">pantry document</a></li>
       <li><a href="03/prefs.ttl">registry</a></li>
@@ -361,7 +391,7 @@ pantry:approxQuantity pantry:None.
     typeof="schema:Product"
     doc="https://jg10.solidcommunity.net/pantry/blog/03/pantry.ttl"
 >
-    &lt;input property="rdfs:label" />
+    &lt;input property="schema:name" />
     &lt;input type="submit" value="New" />
 &lt;/form>
       </code></pre>
@@ -572,6 +602,220 @@ pantry:approxQuantity pantry:None.
       come back to...
     </p>
     <h2 id="part4">Part 4: What can I cook? What do I need to buy?</h2>
+    <small>Updated 17 Mar 2025</small>
+    <p>
+      So far we've covered the first two of the four planned ways of using
+      pantry data with recipes:
+    </p>
+    <ul>
+      <li>List recipes using the grocery as an ingredient.</li>
+      <li>See whether the ingredients for a recipe are available</li>
+      <li>
+        List recipes including which ingredients need to be bought, separating
+        out staples from special ingredients
+      </li>
+      <li>
+        See what groceries need to be used and what recipes might use them
+      </li>
+    </ul>
+    <p>
+      The latter are arguably more important as they allow a quick scan across
+      recipes and ingredients. We'll also define locations of groceries to help
+      scan them in chunks.
+    </p>
+    <p>
+      We introduce two new subclasses <code>pantry:Staple</code> and
+      <code>pantry:Perishable</code>. Staples are usually available. Perishables
+      need to be used when they are available. Groceries will be linked to a
+      location with a new predicate <code>pantry:contains</code>. We adjust the
+      product pane and pantry pane, and add new location and cookbook panes.
+    </p>
+    <h3>Product pane</h3>
+    <ul>
+      <li>
+        <a
+          href="04/app.html?uri=https%3A%2F%2Fjg10.solidcommunity.net%2Fpantry%2Fblog%2F04%2Fpantry.ttl%231638629734460861"
+          >app with product pane</a
+        >
+      </li>
+      <li><a href="04/product.html">product pane</a></li>
+    </ul>
+    <p>
+      The changes to the product pane are minimal. We'll allow for editing of
+      the location of the product with a new experimental web component that
+      also allows specifying a link and a label.
+    </p>
+    <pre><code>
+&lt;my-editable-link rev="pantry:contains">&lt;/my-editable-link>
+      </code></pre>
+    <p>For potatoes, providing a new link and label for location yields:</p>
+    <pre><code>
+:Cellar 
+  rdfs:label "Cellar"; 
+  pantry:contains :1638629734460861 .
+      </code></pre>
+    <p>
+      The statements are by default inserted in the same document as the subject
+      (potatoes), treating location information as part of the pantry itself,
+      which suits us fine for now.
+    </p>
+    <p>
+      We'll also add an <code>autocomplete-input</code> component to select
+      types. We haven't defined a category to use, so it will just autocomplete
+      all known types. The first time we use it, it won't know about
+      <code>pantry:Perishable</code>, but we can just paste the URI in anyway -
+      the component is designed with an open world assumption in mind. The
+      autocomplete is not the nicest UX to specify a type but it's easy to add
+      to the UI and functional for a fairly infrequent task. Potatoes are marked
+      as perishable, and butter as a staple. The latter doesn't need to be
+      marked as perishable - it consistently gets used before its best-before
+      date.
+    </p>
+    <h3>Pantry pane</h3>
+    <p>
+      The pantry pane gets a major upgrade. It now consists of six lists using
+      <code>my-list</code>, <code>show-if</code> conditional rendering, and
+      other display web components. We also add a reusable
+      <code>product-row.html</code> HTML fragment.
+    </p>
+    <figure>
+      <img src="04/pantry.png" style="max-width:300px" />
+      <figcaption>Pantry pane</figcaption>
+    </figure>
+    <p>
+      This screenshot shows that we've got (lots of) potatoes that need to be
+      used. Following the link will show the product pane with the list of
+      recipes. We usually have butter in the house but don't at the moment. An
+      inline <code>my-classifier</code> is provided in case the data is out of
+      date. We have links to each location (to be shown in location pane), and
+      we still have the full list of defined groceries in the pantry. Obviously
+      minimal effort has gone into styling - emphasis is still on prototyping a
+      MVP at this stage.
+    </p>
+    <ul>
+      <li>
+        <a
+          href="04/app.html?uri=https%3A%2F%2Fjg10.solidcommunity.net%2Fpantry%2Fblog%2F03%2Fpantry.ttl"
+          >app with pantry pane</a
+        >
+      </li>
+      <li><a href="04/pantry-index.html">pantry pane</a></li>
+      <li><a href="04/product-row.html">product row code fragment</a></li>
+      <li><a href="04/pantry.ttl">pantry document</a></li>
+    </ul>
+    <h3>Location pane</h3>
+    <p>
+      We're going to model locations with the SOSA (Sensor, Observation, Sample,
+      and Actuator) ontology as
+      <a href="https://www.w3.org/TR/vocab-ssn/#SOSAFeatureOfInterest"
+        >sosa:FeatureOfInterest</a
+      >. At some point we might want to use a subclass, but given the bespoke,
+      experimental nature of the app, for the time being we want to reduce
+      friction to getting started. Treating a location as a feature of interest
+      means that we'll be able to define observable properties and record
+      changes in those properties over time. This provides a point of
+      integration with potential digital home apps that aim to provide a digital
+      twin of the home. We'll be able to talk about not just what is in the
+      fridge, but also its electricity usage, maintenance and entire lifecycle
+      as a consumer good. In contrast to ingredients, which are ephemeral, a
+      fridge or cupboard is a continuing feature of a home. If we replace the
+      fridge, we'd create a new <code>sosa:FeatureOfInterest</code> and move
+      relevant groceries into it.
+    </p>
+    <p>
+      For the time being, the main effect of this decision is that we register
+      the location pane with the <code>sosa:FeatureOfInterest</code> class and
+      keep in mind that its ultimate scope may be much broader than simply
+      listing groceries.
+    </p>
+    <p>
+      The location pane itself is relatively straight-forward, iterating through
+      the <code>pantry:contains</code> objects and displaying them with the
+      <code>product-row.html</code>.
+    </p>
+    <ul>
+      <li>
+        <a
+          href="04/app.html?uri=https%3A%2F%2Fjg10.solidcommunity.net%2Fpantry%2Fblog%2F04%2Fpantry.ttl%23Cellar"
+          >app with location pane</a
+        >
+      </li>
+      <li><a href="04/location.html">location pane</a></li>
+    </ul>
+    <h3>Cookbook pane</h3>
+    <p>
+      As a first pass, the cookbook view will simply show whether the
+      ingredients for each recipe are available. We'll split out the staples
+      because they will appear frequently and are usually assumed to be in the
+      house.
+    </p>
+    <figure>
+      <img src="04/cookbook.png" style="max-width:300px" />
+      <figcaption>Cookbook pane</figcaption>
+    </figure>
+    <p>
+      Implementation is again with the list and conditional rendering
+      components, and reusing the <code>product-row.html</code> fragment. One
+      difficulty arises - the panes need to know about and load the supplies
+      document and pantry document in addition to the recipe (names) themselves.
+      For the time being, these are hardcoded in the pane itself.
+    </p>
+    <p>
+      As an implementation note, Umai cookbooks are
+      <a href="https://github.com/NoelDeMartin/umai/issues/19">currently</a>
+      containers containing documents with <code>schema:Recipe</code> objects -
+      they do not have their own class. Before dereferencing the recipe
+      documents, the cookbook can be identified through its type index
+      registration. This is supported in the app using an
+      <a href="https://w3c.github.io/N3/spec/#paths">n3 resource path</a>.
+      Public recipe lists are <code>schema:ItemList</code>. The app supports
+      both and the approach could be revisited in collaboration with Umai.
+    </p>
+    <pre><code>
+&lt;template
+    else
+    if-n3path="^solid:instanceContainer!solid:forClass"
+    eq-value="schema:Recipe"
+    src="cookbook.html"
+>&lt;/template>
+&lt;template
+    else
+    if-typeof="schema:ItemList"
+    src="cookbook.html"
+>&lt;/template>
+      </code></pre>
+    <ul>
+      <li>
+        <a
+          href="04/app.html?uri=https%3A%2F%2Fjg10.solidcommunity.net%2Fpantry%2Fblog%2F04%2F"
+          >app with cookbook pane recognised using type index</a
+        >
+      </li>
+      <li>
+        <a
+          href="04/app.html?uri=https%3A%2F%2Fjg10.solidcommunity.net%2Fpantry%2Fblog%2F04%2Fsupplies.ttl%23RecipeList"
+          >app with cookbook pane recognised using
+          <code>schema:ItemList</code></a
+        >. The list can also be opened with
+        <a
+          href="https://umai.noeldemartin.com/viewer?url=https%3A%2F%2Fjg10.solidcommunity.net%2Fpantry%2Fblog%2F04%2Fsupplies.ttl%23RecipeList"
+          >Umai viewer</a
+        >.
+      </li>
+      <li><a href="04/cookbook.html">cookbook pane</a></li>
+    </ul>
+    <h2 id="part5">Part 5: Why not just look in the fridge?</h2>
     <p>Coming soon...</p>
+    <p class="notice">
+      Comments welcome on
+      <a href="https://mastodon.social/@jg10/114098701387170324">Mastodon</a>,
+      <a href="https://github.com/jg10-mastodon-social/pantry/issues">GitHub</a>
+      or the
+      <a
+        href="https://forum.solidproject.org/t/building-an-interoperable-pantry-app/9072/1"
+        >Solid Community Forum</a
+      >
+      .
+    </p>
   </body>
 </html>
