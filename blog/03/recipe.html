@@ -57,6 +57,7 @@
         id="recipe-supplies"
         property="schema:supply"
         sort="schema:position"
+        typeof="schema:HowToSupply"
         add-new
         doc="https://jg10.solidcommunity.net/pantry/blog/03/supplies.ttl"
       >
@@ -86,7 +87,7 @@
                 <template name="item">
                   <ion-item>
                     <my-editable-literal
-                      property="rdfs:label"
+                      property="schema:name"
                     ></my-editable-literal>
                     &nbsp;<my-link>&rarr;</my-link>
                     <ion-badge slot="end">
