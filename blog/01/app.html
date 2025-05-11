@@ -23,6 +23,10 @@
       defer=""
     ></script>
     <script
+      src="https://king-cello.bnr.la/scripts/PropertyGetter.js"
+      defer=""
+    ></script>
+    <script
       src="https://king-cello.bnr.la/scripts/loadElement.js"
       defer=""
     ></script>
@@ -37,16 +41,19 @@
       <ion-content>
         <pos-resource
           uri="https://jg10.solidcommunity.net/pantry/blog/01/rosti.ttl#it"
+          about="https://jg10.solidcommunity.net/pantry/blog/01/rosti.ttl#it"
+          typeof="schema:Recipe"
           prefix="sosa: http://www.w3.org/ns/sosa/ schema: https://schema.org/ rdfs: http://www.w3.org/2000/01/rdf-schema# dcterms: http://purl.org/dc/terms/ rdf: http://www.w3.org/1999/02/22-rdf-syntax-ns# prov: https://www.w3.org/ns/prov# oa: http://www.w3.org/ns/oa# ldp: http://www.w3.org/ns/ldp#"
         >
           <div class="ion-padding-horizontal">
             <pos-picture></pos-picture>
+            <my-link hidden property="schema:image"></my-link>
             <h2>
               <my-editable-literal property="schema:name"></my-editable-literal>
             </h2>
             <p>
               <small>
-                <my-list property="schema:sameAs">
+                <my-list rel="schema:sameAs">
                   <template name="item">
                     <my-link><pos-label></pos-label></my-link>&nbsp;
                   </template>
@@ -89,15 +96,18 @@
               </my-list>
             </p>
             <h2>Instructions</h2>
-            <my-list
-              property="schema:recipeInstructions"
-              sort="schema:position"
-            >
+            <my-list rel="schema:recipeInstructions" sort="schema:position">
               <template name="item">
                 <li>
                   <my-editable-literal
                     property="schema:text"
                   ></my-editable-literal>
+                  <span
+                    hidden
+                    property="rdf:type"
+                    href="https://schema.org/HowToStep"
+                  ></span>
+                  <my-link hidden property="schema:position"></my-link>
                 </li>
               </template>
             </my-list>
