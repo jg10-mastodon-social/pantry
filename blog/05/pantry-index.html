@@ -1,0 +1,120 @@
+<h1>Perishables to use</h1>
+<my-list if-typeof="pantry:Perishable" n="200" sort="rdfs:label">
+  <template name="item">
+    <show-if if-else>
+      <template not if-property="pantry:approxQuantity" eq-value="pantry:None">
+        <ion-item>
+          <ion-label>
+            <my-link>
+              <pos-label></pos-label>
+            </my-link>
+          </ion-label>
+        </ion-item>
+      </template>
+    </show-if>
+  </template>
+</my-list>
+<h1>Missing staples</h1>
+<my-list if-typeof="pantry:Staple" sort="rdfs:label" n="1000">
+  <template name="item">
+    <show-if if-else eq-value>
+      <template
+        if-property="pantry:approxQuantity"
+        eq-value="pantry:None"
+        src="https://jg10.solidcommunity.net/pantry/blog/05/product-row.html"
+      >
+        <ion-item>
+          <ion-label>
+            <div class="product-table">
+              <div><pos-label></pos-label><my-link>&rarr;</my-link></div>
+              <div>
+                <my-classifier
+                  property="pantry:approxQuantity"
+                  category="pantry:ProductApproxQuantity"
+                ></my-classifier>
+              </div>
+            </div>
+          </ion-label>
+        </ion-item>
+      </template>
+    </show-if>
+  </template>
+</my-list>
+<h1>Low</h1>
+<pos-resource
+  uri="https://jg10.solidcommunity.net/pantry/terms.ttl#Low"
+  lazy="true"
+>
+  <my-list rev="pantry:approxQuantity" n="200" sort="rdfs:label">
+    <template name="item">
+      <ion-item>
+        <ion-label>
+          <my-link>
+            <pos-label></pos-label>
+          </my-link>
+        </ion-label>
+      </ion-item>
+    </template>
+  </my-list>
+</pos-resource>
+<h1>Lots to use</h1>
+<pos-resource
+  uri="https://jg10.solidcommunity.net/pantry/terms.ttl#Lots"
+  lazy="true"
+>
+  <my-list rev="pantry:approxQuantity" n="200" sort="rdfs:label">
+    <template name="item">
+      <ion-item>
+        <ion-label>
+          <my-link>
+            <pos-label></pos-label>
+          </my-link>
+        </ion-label>
+      </ion-item>
+    </template>
+  </my-list>
+</pos-resource>
+<div>
+  <h1>Locations</h1>
+  <my-list if-property="pantry:contains" sort="rdfs:label">
+    <template name="item">
+      <ion-item>
+        <ion-label>
+          <my-link>
+            <pos-label></pos-label>
+          </my-link>
+        </ion-label>
+      </ion-item>
+    </template>
+  </my-list>
+  <h1>All products</h1>
+  <my-list if-typeof="https://schema.org/Product" sort="rdfs:label" n="200">
+    <template name="item">
+      <ion-item>
+        <ion-label>
+          <my-link>
+            <pos-label></pos-label>
+          </my-link>
+        </ion-label>
+      </ion-item>
+    </template>
+  </my-list>
+  <ion-item>
+    <ion-label>
+      <details>
+        <summary>New product</summary>
+        <my-form>
+          <template>
+            <form
+              typeof="schema:Product"
+              doc="https://jg10.solidcommunity.net/pantry/blog/05/pantry.ttl"
+            >
+              <input property="schema:name" />
+              <input type="submit" value="New" />
+            </form>
+          </template>
+        </my-form>
+      </details>
+    </ion-label>
+  </ion-item>
+</div>

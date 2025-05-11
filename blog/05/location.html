@@ -1,0 +1,31 @@
+<div>
+  <h1>
+    <my-editable-literal placeholder property="rdfs:label">
+    </my-editable-literal>
+  </h1>
+  <show-if not property="rdf:type">
+    <template name="show">
+      <p>
+        Class: <autocomplete-input property="rdf:type"></autocomplete-input>
+      </p>
+    </template>
+  </show-if>
+  Contains
+  <my-list
+    id="pantry"
+    property="pantry:contains"
+    sort="rdfs:label"
+    add-new
+    typeof="https://schema.org/Product"
+    n="100"
+    doc="https://jg10.solidcommunity.net/pantry/blog/05/pantry.ttl"
+  >
+    <template name="item">
+      <show-if
+        typeof="https://schema.org/Product"
+        src="https://jg10.solidcommunity.net/pantry/blog/05/product-row.html"
+      >
+      </show-if>
+    </template>
+  </my-list>
+</div>

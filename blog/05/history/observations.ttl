@@ -1,0 +1,19 @@
+@base <https://jg10.solidcommunity.net/pantry/blog/05/history/observations.ttl> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+
+<#1794773620348985>
+    a <http://www.w3.org/ns/sosa/Observation> ;
+    <http://www.w3.org/ns/sosa/hasFeatureOfInterest> <../pantry.ttl#Cellar> ;
+    <http://www.w3.org/ns/sosa/hasSimpleResult> <../../../terms.ttl#Lots> ;
+    <http://www.w3.org/ns/sosa/observedProperty> <../pantry.ttl#1638629734460861> ;
+    <http://www.w3.org/ns/sosa/resultTime> "2025-05-04T05:13:35Z" ;
+    <http://www.w3.org/ns/sosa/usedProcedure> <../../../terms.ttl#Observed> .
+
+<#8994264346267920>
+    a <http://www.w3.org/ns/sosa/Observation> ;
+    <http://www.w3.org/ns/sosa/hasFeatureOfInterest> <../pantry.ttl#Fridge> ;
+    <http://www.w3.org/ns/sosa/hasSimpleResult> <../../../terms.ttl#None> ;
+    <http://www.w3.org/ns/sosa/observedProperty> <../pantry.ttl#8119875242222632> ;
+    <http://www.w3.org/ns/sosa/resultTime> "2025-05-04T05:15:58Z" ;
+    <http://www.w3.org/ns/sosa/usedProcedure> <../../../terms.ttl#Observed> .
+

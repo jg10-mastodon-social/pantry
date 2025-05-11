@@ -65,7 +65,11 @@
             >
               Edit the approximate quantity of a grocery
             </a>
-            , saving it as an observation. Record that a grocery was used
+            ,
+            <a
+              href="https://jg10.solidcommunity.net/pantry/blog/home.html#part5"
+              >saving it as an observation. Record that a grocery was used</a
+            >
           </li>
           <li>
             <a
@@ -805,6 +809,161 @@ pantry:approxQuantity pantry:None.
       <li><a href="04/cookbook.html">cookbook pane</a></li>
     </ul>
     <h2 id="part5">Part 5: Why not just look in the fridge?</h2>
+    <div>
+      <small>Updated 4 May 2025</small>
+      <p>
+        Who would want to update pantry data? Rather than assuming that the
+        pantry data is a point of truth, we treat it as a partial snapshot. The
+        user interface assumes that at any time the state information may be out
+        of date but that the user is likely in a position to correct it from
+        memory, by judgement or by checking. State is designed to be easy to
+        update. In general, all data is shown, as subsetting with out of date
+        information is likely to be ineffective.
+      </p>
+      <p>
+        We instead use an append only event log as a point of truth. This forms
+        a pantry history that provides provenance context for the grocery state.
+        The user can evaluate whether the state is likely to be up to date, or
+        what its current state might be. If a perishable grocery was last
+        updated a month ago, it has probably been used or is no longer usable -
+        and the state just hasn't been updated. In general as time elapses the
+        confidence in the current state decreases.
+      </p>
+      <p>
+        In addition to spot updates, there are particular times that will result
+        in batch updates to the pantry state. Given a receipt, all new purchases
+        can be marked as bought. As part of meal planning, updates are made to
+        both ingredients that are and are not available. The location pane
+        provides an opportunity to update multiple products at once after
+        hunting for whether a specific ingredient is available. The pantry app
+        doesn't eliminate the need to check the fridge, but it reduces it by
+        acting as a memory aid for what was in the fridge last time it was
+        checked or used.
+      </p>
+      <p>
+        To reuse an existing vocabulary, we model the pantry history as a
+        collection of
+        <a href="https://www.w3.org/TR/vocab-ssn/#SOSAObservation"
+          ><code>sosa:Observation</code></a
+        >
+        objects. The grocery items are treated as a
+        <a href="https://www.w3.org/TR/vocab-ssn/#SOSAObservableProperty"
+          ><code>sosa:ObservableProperty</code></a
+        >
+        of a location, consistent with their definition as a
+        <code>sosa:FeatureOfInterest</code>.
+      </p>
+      <pre><code>
+<#1794773620348985>
+    a sosa:Observation ;
+    sosa:hasFeatureOfInterest <../pantry.ttl#Cellar> ;
+    sosa:hasSimpleResult pantry:Lots ;
+    sosa:observedProperty> <../pantry.ttl#1638629734460861> ;
+    sosa:resultTime "2025-05-04T05:13:35Z" ;
+    sosa:usedProcedure pantry:Observed .
+</code></pre>
+      <p>
+        We'll start by storing observations in
+        <code>history/observations.ttl</code>. That won't scale but gives us a
+        starting point to later use a more complex event stream structure, e.g.
+        using
+        <a
+          href="https://tree.linkeddatafragments.org/linked-data-event-streams/"
+          >LDES</a
+        >.
+      </p>
+      <ul>
+        <li><a href="05/history/observations.ttl">pantry history</a></li>
+      </ul>
+      <p>
+        The assumption of incompleteness of pantry state is consistent with how
+        we've approached the pantry index itself. Already when we created the
+        pantry pane, the set of groceries was assumed to be incomplete, and
+        adding new groceries is intended to be low friction. Numeric IDs are
+        used instead of readable names to allow users to change the intended
+        meaning over time. It is recognised that this may cause (usually minor)
+        inconsistencies in historical data.
+      </p>
+      <p>
+        We'll make small changes to how product state is shown. The product pane
+        now uses a pattern where direct edits are actually only staging. If the
+        edits are correct, the state is then saved to the event log. The last
+        observation is also shown along with its date. This could be styled more
+        nicely, but in the mean time it's functional.
+      </p>
+      <p>
+        We also add a convenience button to register that a product was used. It
+        doesn't update the pantry state but it does provide a contextual
+        reminder of when the quantity of the product might have changed. It
+        might be useful to add other convenience interactions in future.
+      </p>
+      <figure>
+        <img src="05/product.png" style="max-width:300px" />
+        <figcaption>
+          Product pane showing last stored observation - the existing editors
+          now provide staging prior to updating the event log.
+        </figcaption>
+      </figure>
+      <p>
+        The HTML interface here uses the experimental form again in order to
+        save an entire observation at once. A new <code>set-value</code> element
+        sets the value of its child based on RDF data. A more intuitive HTML
+        interface would likely be possible.
+      </p>
+      <pre><code>
+&lt;my-form>&lt;template>
+    &lt;form
+        typeof="sosa:Observation"
+        doc="https://jg10.solidcommunity.net/pantry/blog/05/history/observations.ttl"
+    >
+        &lt;set-value rev="pantry:contains">
+            &lt;input type="hidden" property="sosa:hasFeatureOfInterest" />
+        &lt;/set-value>
+        &lt;set-value>
+            &lt;input type="hidden" property="sosa:observedProperty" />
+        &lt;/set-value>
+        &lt;set-value property="pantry:approxQuantity">
+            &lt;input
+                type="hidden"
+                property="sosa:hasSimpleResult"
+            />
+        &lt;/set-value>
+        &lt;set-value date-now>
+            &lt;input type="hidden" property="sosa:resultTime" />
+        &lt;/set-value>
+        &lt;input
+            type="hidden"
+            property="sosa:usedProcedure"
+            value="pantry:Observed"
+        />
+        &lt;input type="submit" value="Update" />
+    &lt;/form>
+&lt;/template>&lt;/my-form>
+</code></pre>
+      <p>
+        The product row code fragment gets a similar interface, hidden behind a
+        <code>details</code> element, so the provenance information is readily
+        available in the cookbook, location and pantry index panes.
+      </p>
+      <ul>
+        <li>
+          <a
+            href="05/app.html?uri=https%3A%2F%2Fjg10.solidcommunity.net%2Fpantry%2Fblog%2F05%2Fpantry.ttl%231638629734460861"
+            >app with product pane</a
+          >
+        </li>
+        <li>
+          <a
+            href="05/app.html?uri=https%3A%2F%2Fjg10.solidcommunity.net%2Fpantry%2Fblog%2F05%2Fpantry.ttl"
+            >app with pantry pane showing product row</a
+          >
+        </li>
+        <li><a href="05/product.html">product pane</a></li>
+        <li><a href="05/product-row.html">product row code fragment</a></li>
+        <li><a href="05/pantry-index.html">pantry pane</a></li>
+      </ul>
+    </div>
+    <h2 id="part6">Part 6: Shopping list integration</h2>
     <p>Coming soon...</p>
     <p class="notice">
       Comments welcome on

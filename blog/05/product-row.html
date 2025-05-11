@@ -1,0 +1,75 @@
+<style>
+  .product-table {
+         display:grid;
+         grid-template-columns:1fr 10ch 10ch;
+         margin-left:5px;
+         margin-right:5px;
+         max-width:400px;
+     }
+</style>
+<ion-item>
+  <ion-label>
+    <details>
+      <summary>
+        <div class="product-table">
+          <div><pos-label></pos-label><my-link>&rarr;</my-link></div>
+          <div>
+            <my-classifier
+              property="pantry:approxQuantity"
+              category="pantry:ProductApproxQuantity"
+            ></my-classifier>
+          </div>
+        </div>
+      </summary>
+      <p>
+        <when-loaded
+          uri="https://jg10.solidcommunity.net/pantry/blog/05/history/observations.ttl"
+          update=".obs"
+        ></when-loaded>
+        <my-list
+          class="obs"
+          rev="sosa:observedProperty"
+          sort="sosa:resultTime"
+          sort-order="desc"
+          n="1"
+        >
+          <template name="item">
+            <my-editable-literal
+              property="sosa:resultTime"
+            ></my-editable-literal>
+            <pos-value
+              predicate="http://www.w3.org/ns/sosa/hasSimpleResult"
+            ></pos-value>
+          </template>
+        </my-list>
+      </p>
+      <my-form class="obs">
+        <template>
+          <form
+            typeof="sosa:Observation"
+            doc="https://jg10.solidcommunity.net/pantry/blog/05/history/observations.ttl"
+          >
+            <set-value rev="pantry:contains">
+              <input type="hidden" property="sosa:hasFeatureOfInterest" />
+            </set-value>
+            <set-value>
+              <input type="hidden" property="sosa:observedProperty" />
+            </set-value>
+            <set-value property="pantry:approxQuantity">
+              <input type="hidden" property="sosa:hasSimpleResult" />
+            </set-value>
+            <set-value date-now>
+              <input type="hidden" property="sosa:resultTime" />
+            </set-value>
+            <input
+              type="hidden"
+              property="sosa:usedProcedure"
+              value="pantry:Observed"
+            />
+            <input type="submit" value="Save" />
+          </form>
+        </template>
+      </my-form>
+    </details>
+  </ion-label>
+</ion-item>

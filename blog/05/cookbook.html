@@ -1,0 +1,54 @@
+<h2>Recipes</h2>
+<see-also property="ldp:contains" update=".recipe-list"></see-also>
+<my-list property="schema:itemListElement">
+  <template name="item">
+    <see-also property="schema:item" update=".recipe-list"></see-also>
+  </template>
+</my-list>
+<when-loaded
+  uri="https://jg10.solidcommunity.net/pantry/blog/05/supplies.ttl"
+  update=".recipe-list"
+></when-loaded>
+<when-loaded
+  uri="https://jg10.solidcommunity.net/pantry/blog/05/pantry.ttl"
+  update=".staple-list"
+></when-loaded
+><my-list class="recipe-list" if-typeof="schema:Recipe" sort="schema:name">
+  <template name="item">
+    <div style="min-height:80px">
+      <ion-item>
+        <my-link><pos-label></pos-label></my-link>
+      </ion-item>
+      <my-list property="schema:supply">
+        <template name="item">
+          <my-list property="schema:item">
+            <template name="item">
+              <show-if not typeof="pantry:Staple">
+                <show-if
+                  typeof="https://schema.org/Product"
+                  src="product-row.html"
+                >
+                </show-if>
+              </show-if>
+            </template>
+          </my-list>
+        </template>
+      </my-list>
+    </div>
+  </template>
+</my-list>
+<h3>Staples</h3>
+<my-list
+  class="staple-list"
+  if-typeof="pantry:Staple"
+  doc="https://jg10.solidcommunity.net/pantry/blog/05/pantry.ttl"
+  sort="schema:name"
+  n="1000"
+>
+  <template name="item">
+    <show-if
+      typeof="pantry:Staple"
+      src="https://jg10.solidcommunity.net/pantry/blog/05/product-row.html"
+    ></show-if>
+  </template>
+</my-list>
